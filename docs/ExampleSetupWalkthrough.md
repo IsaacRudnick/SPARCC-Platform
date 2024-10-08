@@ -220,16 +220,3 @@ print(f"Polled at {ButtonSensor.timestamp}")
 ```
 
 > Note, this is when the Sensor instance received the value, **not** when the Arduino polled the sensor. There may be a delay between the two, but it should never be more than ~100ms.
-
-<!-- Style images -->
-<style>
-img {
-  border: 5px solid #C6AA76;    /* Golden border */
-  border-radius: 30px;          /* Curved edges */
-  padding: 5px;                 /* Padding inside the border */
-  display: block;               /* Ensures the image is treated as a block element */
-  margin: 10px auto;            /* Center the image and add margin */
-  max-width: 100%;              /* Ensure the image doesn't overflow */
-  box-sizing: border-box;       /* Includes padding and border in the element's total width and height */
-}
-</style>

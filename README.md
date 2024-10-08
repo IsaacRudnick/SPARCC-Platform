@@ -57,16 +57,3 @@ For more information on setting up these components, see the [example walkthroug
 # Troubleshooting
 
 See the [troubleshooting guide](/docs/Troubleshooting.md) for common issues and solutions.
-
-<!-- Style images -->
-<style>
-img {
-  border: 5px solid #C6AA76;    /* Golden border */
-  border-radius: 30px;          /* Curved edges */
-  padding: 5px;                 /* Padding inside the border */
-  display: block;               /* Ensures the image is treated as a block element */
-  margin: 10px auto;            /* Center the image and add margin */
-  max-width: 100%;              /* Ensure the image doesn't overflow */
-  box-sizing: border-box;       /* Includes padding and border in the element's total width and height */
-}
-</style>
