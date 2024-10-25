@@ -1,3 +1,6 @@
+#ifndef SENSORS_H
+#define SENSORS_H
+
 #include <Arduino.h> // Required for Arduino-specific functions like pinMode()
 
 // Base Sensor class to handle any number of pins
@@ -92,8 +95,6 @@ Sensor *sensors[] = {
     new ButtonSensor(2),
 };
 
-const int sensorsCount = sizeof(sensors) / sizeof(sensors[0]);
-
 // Setup all sensors
 void setupSensors()
 {
@@ -102,3 +103,8 @@ void setupSensors()
         sensors[i]->setup();
     }
 }
+
+// Number of sensors (0 if none)
+const int sensorsCount = sizeof(sensors) ? sizeof(sensors) / sizeof(sensors[0]) : 0;
+
+#endif

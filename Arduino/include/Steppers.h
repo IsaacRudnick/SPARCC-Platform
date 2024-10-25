@@ -1,3 +1,6 @@
+#ifndef STEPPERS_H
+#define STEPPERS_H
+
 #include <AccelStepper.h>
 
 AccelStepper testingStepper1 = AccelStepper(AccelStepper::DRIVER, 22, 23);
@@ -18,5 +21,7 @@ void setupSteppers()
     steppers[1].setAcceleration(500);
 }
 
-// Length of steppers array is byte size of steppers divided by byte size of first element. If no elements, length is 0.
+// Number of steppers (0 if none)
 int steppersCount = sizeof(steppers) ? sizeof(steppers) / sizeof(steppers[0]) : 0;
+
+#endif
