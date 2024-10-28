@@ -57,7 +57,11 @@ Take note of this port. We will use/assume "COM9" for this tutorial, but it will
 
 ## Adding Motors and Sensors
 
-### Servo Setup
+This section will walk you through adding servos, steppers, and sensors to the Arduino codebase. The Python code will then interact with these components. It is reccomended to put your python code in a file called `main.py` for simplicity.
+
+### Servo Motors
+
+#### Shield Servos
 
 First, we will set up and use shield servos. To do so, we must connect the [specific Adafruit shield](https://www.adafruit.com/product/1411) to the Arduino. A red light on the shield should turn on.
 
@@ -118,7 +122,11 @@ Assuming there are no errors, you should be prompted for a degree value for the 
 
 Get a good feel for using the servo class. Try setting up a second servo, moving this one, or even adjusting the degree range (e.g. from `(0, 180)` to `(-90, 90)`)
 
-### Stepper Setup
+#### "Loose" (Non-Shield) Servos
+
+TODO: Add this section.
+
+### Stepper Motors
 
 Stepper motors are more complicated than these servos, mainly because they require more assembly. The stepping (constant, alternating pulsing of current) of the stepper is abstracted, you don't need to deal with it. However, you do need to wire a stepper motor driver.
 
@@ -127,7 +135,38 @@ Here's what it looks like (adapted from the base wiring diagram)
 
 > Please note that for some steppers, the order of the wires (often called A+, A-, B+, B-) differs. There is **not** a standard for this, so you may need to try a few things. If you are unsure, try to google "{Stepper Model} filetype:pdf" to find a datasheet, which may include a diagram telling you which wire is which. Then, you can plug the correct wires into the appropriate A/B +/- terminals.
 
-TODO: This code and setup is not tested.
+In the Arduino code, you will need to configure the stepper. This is done in the [/Arduino/include/Steppers.h](/Arduino/include/Steppers.h) file. This is what your stepper configuration might look like. To add more steppers, just look for comments that start with `YOU:` and follow the instructions.
+
+```cpp
+#ifndef STEPPERS_H
+#define STEPPERS_H
+
+#include <AccelStepper.h>
+
+// First pin is for step, second pin is for direction
+AccelStepper myStepper1 = AccelStepper(AccelStepper::DRIVER, 23, 22);
+// YOU: Add as many steppers as you want here
+
+AccelStepper steppers[] = {
+    myStepper1,
+};
+
+// Number of steppers (0 if none)
+int steppersCount = sizeof(steppers) ? sizeof(steppers) / sizeof(steppers[0]) : 0;
+
+// Call this in the setup() function to set up the steppers
+void setupSteppers()
+{
+    // Be careful: this will not work if you replace steppers[n] with the stepper object directly
+    steppers[0].setMaxSpeed(1250);
+    steppers[0].setAcceleration(500);
+    // YOU: Add configuration for more steppers here
+}
+
+#endif
+```
+
+Now, we can interact with the stepper in Python. Here is an example of how you might do that:
 
 ```python
 from ArduinoInterface import *
@@ -151,9 +190,14 @@ while True:
     Arduino.set_stepper(MyStepper, target)
 ```
 
-### Sensor Setup
+Make sure your stepper can turn clockwise and counterclockwise. If it can't, look in the [troubleshooting document](docs/Troubleshooting.md) for help.
+
+Once the above works properly, you can try adding more steppers, changing the direction, or changing the number of steps per revolution. You can also try changing the speed and acceleration in the Arduino code. Finally, try making your own program in Python, such as making the stepper into a clock secondhand.
+
+### Sensors (and Software Sensors)
 
 This tutorial will walk you through adding a simple digital button sensor, but you will see in the tutorial how adding other sensor types may be accomplished.
+These can even include software sensors, such as a "sensor" that reads the current time or reports information about a stepper motor.
 
 The below diagram shows a closeup of the wiring you must implement for a pushbutton which uses a V+/HIGH, GND/LOW, and signal wire. The signal wire will read as LOW (0) if the button is pressed and HIGH (1) if it is not.
 
@@ -162,7 +206,7 @@ The wiring of any sensor will depend on its specific requirements. The code will
 ![Wiring Diagram](/media/servo_and_sensor_wiring.png)
 
 THe advantage of this system is in the codebase. In
-[./Arduino/include/Sensors.h](/Arduino/include/Sensors.h), you will configure the sensor.
+[/Arduino/include/Sensors.h](/Arduino/include/Sensors.h), you will configure the sensor.
 
 The code for some sensors is already written. For example, the `ButtonSensor` class is already written. All you need to do to is add the sensor to the array of sensors near the bottom of the file. The `ButtonSensor` class takes in one parameter, the pin number of the sensor. In the figure above, that's pin 2, but you can use another pin if you want. DO NOT use pins 1 or 2. They are reserved by the Arduino for serial communication, and will interfere with the ArduinoInterface.
 
