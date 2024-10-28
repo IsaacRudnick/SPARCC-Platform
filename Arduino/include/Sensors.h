@@ -90,10 +90,36 @@ public:
     }
 };
 
+// Sensor to show the current time since the start of the program
+class milliSecondsSinceStartSensor : public Sensor
+{
+public:
+    milliSecondsSinceStartSensor() : Sensor(NULL, 0), startTime(0) {}
+
+    void setup() override
+    {
+        startTime = millis();
+    }
+
+    int read() override
+    {
+        return millis() - startTime;
+    }
+
+private:
+    unsigned long startTime;
+};
+
+// YOU: Add more sensor classes here, as desired.
+
 // Sensor array to store multiple sensors
 Sensor *sensors[] = {
     new ButtonSensor(2),
+    // YOU: Add more sensors here
 };
+
+// Number of sensors (0 if none)
+const int sensorsCount = sizeof(sensors) ? sizeof(sensors) / sizeof(sensors[0]) : 0;
 
 // Setup all sensors
 void setupSensors()
@@ -103,8 +129,5 @@ void setupSensors()
         sensors[i]->setup();
     }
 }
-
-// Number of sensors (0 if none)
-const int sensorsCount = sizeof(sensors) ? sizeof(sensors) / sizeof(sensors[0]) : 0;
 
 #endif

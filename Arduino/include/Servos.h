@@ -4,22 +4,24 @@
 
 #include <Servo.h>
 
-Servo testingServo1;
-Servo testingServo2;
+Servo myServo1;
+Servo myServo2;
+// YOU: Add as many loose servos as you want here
 
 Servo looseServos[] = {
-    testingServo1,
-    testingServo2,
+    myServo1,
+    myServo2,
 };
+
+// Number of loose servos (0 if none)
+int looseServosCount = sizeof(looseServos) ? sizeof(looseServos) / sizeof(looseServos[0]) : 0;
 
 // Call this in the setup() function to set up the servos
 void setupServos()
 {
-    looseServos[0].attach(22);
-    looseServos[1].attach(23);
+    looseServos[0].attach(4);
+    looseServos[1].attach(5);
+    // YOU: Add configuration for more loose servos here
 }
-
-// Number of loose servos (0 if none)
-int looseServosCount = sizeof(looseServos) ? sizeof(looseServos) / sizeof(looseServos[0]) : 0;
 
 #endif
