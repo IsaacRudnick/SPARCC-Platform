@@ -1,6 +1,18 @@
 # Serial Perception-Action Robotic Control and Communication Platform (SPARCC Platform)
 
-This system was developed for use on Vassar College's HARPER project, a robotic platform for research and education. It is designed to abstract the communication between a Python program and an Arduino, allowing for easy control of PWM servos, stepper drivers, and sensors. The system is designed to be easily extensible, allowing for the addition of new components with minimal changes to the existing code. An example of it in use can be seen [here](https://www.github.com/IsaacRudnick/Whiteboard-Plotter).
+This system was developed for use on Vassar College's HARPER project, a robotics platform for research and education. The SPARCC Platform is designed to abstract the communication between a Python program and an Arduino, allowing for easy control of PWM servos and stepper drivers, along with easy querying of sensors. The system is designed to be easily extensible, allowing for the addition of new components with minimal changes to the existing code. An example of it in use can be seen [here](https://www.github.com/IsaacRudnick/Whiteboard-Plotter).
+
+> Note that the example project may not be up-to-date with the current version of the platform. The example project is a good reference for how to use the platform, but the code may not be directly compatible.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Should I Use This For My Project?](#should-i-use-this-for-my-project)
+- [Installation](#installation)
+- [Example Usage](#example-usage)
+- [Software Overview](#software-overview)
+- [Hardware Overview](#hardware-overview)
+- [Troubleshooting](#troubleshooting)
 
 ## Overview
 
@@ -8,9 +20,15 @@ A Python class (ArduinoInterface) sends serial commands and queries to a connect
 
 ## Should I Use This For My Project?
 
-This platform helps projects that require computation beyond the abilities of an Arduino (e.g., machine learning, computer vision, etc.) but still need to interface with stepper motors, servos, and digital/analog sensors. Though a Raspberry Pi sometimes fills this need, they have less compute power than a desktop, fewer GPIO pins than many Arduinos, and lack the extensive collection of Arduino libraries. 
+This platform helps projects that require computation beyond the abilities of an Arduino (e.g., machine learning, computer vision, etc.) but still need to interface with stepper motors, servos, and digital/analog sensors. Though a Raspberry Pi sometimes fills this need, they have less compute power than a desktop, fewer GPIO pins than many Arduinos, and lack the extensive collection of Arduino libraries.
 
 If your project requires communication between an Arduino (for hardware control) and a Python program (for computation), this platform is a good choice. If you want to see it in action, check out the [example project](https://www.github.com/IsaacRudnick/Whiteboard-Plotter).
+
+> Note that the example project may not be up-to-date with the current version of the platform. The example project is a good reference for how to use the platform, but the code may not be directly compatible.
+
+## Installation
+
+To install, download this repository and install the required Python packages with `pip install -r requirements.txt`. The Arduino code is compiled with PlatformIO, which can be installed as a VSCode extension. If you need an overview of using the platform, see the [example walkthrough](/docs/ExampleSetupWalkthrough.md).
 
 ## Example Usage
 
