@@ -1,7 +1,7 @@
 import serial
-from Sensor import *
-from Stepper import *
-from Servo import *
+from pycomponents.Sensor import *
+from pycomponents.Servo import *
+from pycomponents.Stepper import *
 from enum import Enum
 
 # ====================================== VALID COMMAND TYPES ===================================== #
