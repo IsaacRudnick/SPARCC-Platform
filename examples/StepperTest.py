@@ -3,7 +3,6 @@ from ArduinoInterface import *
 # Declare port that Arduino is connected to
 PORT: str = "COM9"
 
-# Initialize Stepper that we connected to pins TODO: ???
 # The 0 represents its index in the Steppers.h file, NOT ITS PINS
 MyStepper = Stepper(0, StepperDirection.NORMAL)
 
