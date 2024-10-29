@@ -8,7 +8,9 @@ A Python class (ArduinoInterface) sends serial commands and queries to a connect
 
 ## Should I Use This For My Project?
 
-TODO: Add this section, possibly with a flowchart
+This platform helps projects that require computation beyond the abilities of an Arduino (e.g., machine learning, computer vision, etc.) but still need to interface with stepper motors, servos, and digital/analog sensors. Though a Raspberry Pi sometimes fills this need, they have less compute power than a desktop, fewer GPIO pins than many Arduinos, and lack the extensive collection of Arduino libraries. 
+
+If your project requires communication between an Arduino (for hardware control) and a Python program (for computation), this platform is a good choice. If you want to see it in action, check out the [example project](https://www.github.com/IsaacRudnick/Whiteboard-Plotter).
 
 ## Example Usage
 
