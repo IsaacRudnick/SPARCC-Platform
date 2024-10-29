@@ -19,6 +19,9 @@ Tutorial Prerequisites:
 - Stepper Motor and DM320T Stepper Motor Driver
 - Digital Button Sensor
 
+Example configuration of these components is shown in the below diagram. There are "loose" and "shield" servos, a stepper driver, and a button sensor.
+![Wiring Diagram](/media/example_assembly.png)
+
 ## PlatformIO and VSCode Setup
 
 Install the PlatformIO Extension on VSCode. On the left side of your screen (the "Activity Bar"), you should see a small alien-head icon.
@@ -124,7 +127,75 @@ Get a good feel for using the servo class. Try setting up a second servo, moving
 
 #### "Loose" (Non-Shield) Servos
 
-TODO: Add this section.
+Now, we will set up a "loose" servo. For servos that you wish not to connect to the shield (e.g., those taking a different voltage), you can connect their V+/GND wires directly to your other power source, and their signal wires directly to the Arduino. For simplicity, we will use a regular servo that _could_ connect to the shield, but we will connect it directly to the Arduino.
+
+First, connect the servo's V+ and GND wires to the power source (you can use the Arduino's 5V and GND pins). Then, connect the signal wire to the Arduino. You can use most digital pins, not just the ones labeled with a `~` or `PWM` next to them.
+
+For simplicity, we will use pin 7 for this servo, but you can use any digital pin except those labeled for communication (pins 14-21 on a mega)since these can cause issues.
+
+Since this servo is a "loose" servo, we will need to set it up on the Arduino side, too. In the Arduino code, you will need to configure the servo. This is done in the [/Arduino/include/Servos.h](/Arduino/include/Servos.h) file. This is what your servo configuration might look like. To add more servos, just look for comments that start with `YOU:` and follow the instructions.
+
+```cpp
+// Note: this file only defines "loose" servos. The shield servos are defined in the Adafruit_PWMServoDriver library.
+#ifndef SERVOS_H
+#define SERVOS_H
+
+#include <Servo.h>
+
+Servo myServo1;
+// YOU: Add as many loose servos as you want here
+
+Servo looseServos[] = {
+    myServo1,
+};
+
+// Number of loose servos (0 if none)
+int looseServosCount = sizeof(looseServos) ? sizeof(looseServos) / sizeof(looseServos[0]) : 0;
+
+// Call this in the setup() function to set up the servos
+void setupServos()
+{
+    looseServos[0].attach(7);
+    // YOU: Add configuration for more loose servos here
+}
+
+#endif
+```
+
+Now, we can interact with the servo in Python. When we used a shield servo, we referenced it by its pin number. For loose servos, the Python code will instead reference them by their index in the Arduino file (0 in this example). Here is an example of what your code might look like:
+
+```python
+from ArduinoInterface import *
+
+# Declare port that Arduino is connected to
+PORT: str = "COM9"
+
+# Initialize Servo that represents the one at index 0 in the looseServos array
+MyServo = Servo(0,
+                ServoConnectionType.LOOSE,
+                ServoActuationType.POSITION,
+                # This is what matters to the Arduino.
+                (500, 2500),
+                # The below range can be anything; it is only used for mapping degree ranges to pwm ranges
+                # E.g., you could do (-90, 90)
+                # OR EVEN (0, 1000) but that would not align with the actual degrees.
+                (0, 180),
+                ServoInverted.NORMAL)
+
+# Initialize an interface for this arduino
+Arduino = ArduinoInterface(PORT,
+                           [MyServo],
+                           [],
+                           [])
+
+print(f"Servo degrees are capped between {MyServo.actuation_range[0]} and {MyServo.actuation_range[1]}")
+# Continuously ask user for servo degrees.
+while True:
+    degrees = int(input("Enter degrees for the servo. "))
+    Arduino.set_servo(MyServo, degrees)
+```
+
+If you are running many servos from 4.8-6V, it is recommended to just use the shield. However, for projects requiring only a few servos, or servos with different voltage requirements, loose servos are a good option. You can initialize loose and shield servos together, allowing for a mix. You can also add more servos, change the degree range, or invert the servo in the Arduino code.
 
 ### Stepper Motors
 
@@ -174,7 +245,6 @@ from ArduinoInterface import *
 # Declare port that Arduino is connected to
 PORT: str = "COM9"
 
-# Initialize Stepper that we connected to pins TODO: ???
 # The 0 represents its index in the Steppers.h file, NOT ITS PINS
 MyStepper = Stepper(0, StepperDirection.NORMAL)
 
