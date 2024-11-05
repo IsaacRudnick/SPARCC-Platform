@@ -81,7 +81,7 @@ First, we will set up and use shield servos. To do so, we must connect the [spec
 
 Next, connect 4.8-6V to the screwdown terminal of the shield. Once the power is on, a green light should turn on next to the red light. This power supply is used by the shield for all attached servos, and is separate from the 5V Arduino power supply.
 
-Connect a Servo to the shield. For this tutorial, we will be using an "SG90 9G Micro Servo" which has a 500-2500 microsecond pulse range for its PWM duty signal.
+Connect a servo to the shield. For this tutorial, we will be using an "SG90 9G Micro Servo" which has a 500-2500 microsecond pulse range for its PWM duty signal.
 
 > You don't have to know what this means, but it is important to know that different servos have different pulse ranges. If your servo is different, you will need to adjust the pulse range in the Python code. You can find this information in the servo's datasheet, which you can find by googling "{Servo Model} datasheet".
 
@@ -110,7 +110,7 @@ from ArduinoInterface import *
 # Declare port that Arduino is connected to
 PORT: str = "COM9"
 
-# Initialize Servo that we connected to pin set 7
+# Initialize servo that we connected to pin set 7
 MyServo = Servo(7,
                 ServoConnectionType.SHIELD,
                 ServoActuationType.POSITION,
@@ -137,7 +137,7 @@ while True:
 
 Run the Python code.
 
-Assuming there are no errors, you should be prompted for a degree value for the servo to go to. Try some values out. Notice that entering a value outside the degree range does not harm the servo; the value is capped by the Servo class.
+Assuming there are no errors, you should be prompted for a degree value for the servo to go to. Try some values out. Notice that entering a value outside the degree range does not harm the servo; the value is capped by the `Servo` class.
 
 Get a good feel for using the servo class. Try setting up a second servo, moving this one, or even adjusting the degree range (e.g. from `(0, 180)` to `(-90, 90)`)
 
@@ -192,7 +192,7 @@ from ArduinoInterface import *
 # Declare port that Arduino is connected to
 PORT: str = "COM9"
 
-# Initialize Servo that represents the one at index 0 in the looseServos array
+# Initialize servo that represents the one at index 0 in the looseServos array
 MyServo = Servo(0,
                 ServoConnectionType.LOOSE,
                 ServoActuationType.POSITION,
@@ -329,7 +329,7 @@ from ArduinoInterface import *
 # Declare port that Arduino is connected to
 PORT: str = "COM9"
 
-# Initialize Sensor that we connected to pin 2.
+# Initialize sensor that we connected to pin 2.
 # The 0 represents its index in the Sensors.h file, NOT ITS PIN
 MyButtonSensor = Sensor(0)
 
@@ -363,7 +363,7 @@ Arduino.poll_sensor(MyButtonSensor)
 print(MyButtonSensor.value)
 ```
 
-and Sensor instances also record when they last stored a value, so you can see how recent the value is by checking the timestamp attribute.
+and `Sensor` instances also record when they last stored a value, so you can see how recent the value is by checking the timestamp attribute.
 
 ```python
 Arduino.poll_sensor(MyButtonSensor)
@@ -371,7 +371,7 @@ print(MyButtonSensor.value)
 print(f"Polled at {MyButtonSensor.timestamp}")
 ```
 
-> Note, this is when the Sensor instance received the value, **not** when the Arduino polled the sensor. There may be a delay between the two, but it should never be more than ~100ms.
+> Note, this is when the `Sensor` instance received the value, **not** when the Arduino polled the sensor. There may be a delay between the two, but it should never be more than ~100ms.
 
 ## Conclusion
 
