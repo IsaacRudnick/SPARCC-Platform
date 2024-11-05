@@ -55,9 +55,9 @@ void setup()
     // Initialize Serial communication
     Serial.begin(115200);
     Serial.setTimeout(100); // Set timeout for Serial.readString()
-    Serial.println("Initializing libraries...");
 
-    // Initialize PWM servo driver
+    // Initialize PWM servo shield
+    Serial.println("Initializing libraries...");
     pwm.begin();
     pwm.setOscillatorFrequency(27000000);
     pwm.setPWMFreq(SERVO_FREQ);
