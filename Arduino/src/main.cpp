@@ -55,7 +55,7 @@ void setup()
     // Initialize Serial communication
     Serial.begin(115200);
     Serial.setTimeout(100); // Set timeout for Serial.readString()
-    Serial.println("Initializing...");
+    Serial.println("Initializing libraries...");
 
     // Initialize PWM servo driver
     pwm.begin();
@@ -63,9 +63,13 @@ void setup()
     pwm.setPWMFreq(SERVO_FREQ);
 
     // Initialize peripherals
+    Serial.println("Initializing steppers...");
     setupSteppers();
+    Serial.println("Initializing servos...");
     setupServos();
+    Serial.println("Initializing sensors...");
     setupSensors();
+    Serial.println("Ready.");
 }
 
 void loop()
