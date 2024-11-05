@@ -54,7 +54,8 @@ void setup()
 {
     // Initialize Serial communication
     Serial.begin(115200);
-    Serial.setTimeout(100); // Set timeout for Serial.readString()
+    // Set timeout for Serial.readString()
+    Serial.setTimeout(100);
 
     // Initialize PWM servo shield
     Serial.println("Initializing libraries...");
