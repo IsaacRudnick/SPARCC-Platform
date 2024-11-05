@@ -10,7 +10,7 @@ Running too many volts or amps through certain components, as well as incompatib
 
 ## Serial Disconnects/Interrupts
 
-Make sure the Arduino Communication pins are not being used, unless you are doing so intentionally. This includes digital pins 0 and 1, which are used for serial communication. If you are using these pins for something else, it may cause an interruption in communication.
+Make sure the Arduino Communication pins (on a Mega, pins 0-1 & 14-21) are not being used, unless you are doing so intentionally. This includes digital pins 0 and 1, which are used for serial communication. If you are using these pins for something else, it may cause an interruption in communication.
 
 ## Code Not Uploading Properly
 
