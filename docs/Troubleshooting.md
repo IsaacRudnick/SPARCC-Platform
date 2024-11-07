@@ -26,7 +26,7 @@ If you are getting an error in uploading the code, try
 1. Audibly declaring "I'll just get a new Arduino" (this may scare the Arduino into working)
 1. Getting a replacement Arduino and trying to upload to that one.
 
-## Stepper Motor Only Moving One Direction
+## Stepper Motor Not Moving or Only Moving One Direction
 
 Make sure that the OPTO terminal is receiving 5V and that the DIR pin/wire is outputting correctly. One way to do this is to move the DIR wire so that instead of connecting to the DM320T stepper driver, it powers an LED circuit. Then, when the code sets the direction of the stepper, the LED should reflect the direction (on for one direction and off for another). If it is always on or off, you should check the connections and ensure you've followed the setup instructions (see the [example setup walkthrough](/docs/ExampleSetupWalkthrough.md)).
 
