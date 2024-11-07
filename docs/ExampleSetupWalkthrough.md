@@ -20,7 +20,7 @@ Tutorial Prerequisites:
 - Digital Button Sensor
 
 Example configuration of these components is shown in the below diagram. There are "loose" and "shield" servos, a stepper driver, and a button sensor.
-![Wiring Diagram](/media/example_assembly.png)
+![Wiring Diagram](/docs/media/example_assembly.png)
 
 ## PlatformIO, VSCode, and Environment Setup
 
@@ -226,7 +226,7 @@ If you are running many servos from 4.8-6V, it is recommended to just use the sh
 Stepper motors are more complicated than these servos, mainly because they require more assembly. The stepping (constant, alternating pulsing of current) of the stepper is abstracted, you don't need to deal with it. However, you do need to wire a stepper motor driver.
 
 Here's what it looks like (adapted from the base wiring diagram)
-![Stepper Wiring Diagram](/media/stepper_wiring.png)
+![Stepper Wiring Diagram](/docs/media/stepper_wiring.png)
 
 > Please note that for some steppers, the order of the wires (often called A+, A-, B+, B-) differs. There is **not** a standard for this, so you may need to try a few things. If you are unsure, try to google "{Stepper Model} datasheet" to find a datasheet, which may include a diagram telling you which wire is which. Then, you can plug the correct wires into the appropriate A/B +/- terminals.
 
@@ -303,7 +303,7 @@ The below diagram shows a closeup of the wiring you must implement for a pushbut
 
 The wiring of any sensor will depend on its specific requirements. The code will allow for some flexibility, e.g., in which pin(s) you use.
 
-![Wiring Diagram](/media/servo_and_sensor_wiring.png)
+![Wiring Diagram](/docs/media/servo_and_sensor_wiring.png)
 
 The advantage of this system is in the codebase. In [/Arduino/include/Sensors.h](/Arduino/include/Sensors.h), you will configure the sensor.
 
