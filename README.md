@@ -39,7 +39,7 @@ This brief overview shows how the Arduino supports:
 - stepper motors
 - analog and digital sensors
 
-![Wiring Diagram](/media/example_assembly.png)
+![Wiring Diagram](/docs/media/example_assembly.png)
 
 ## Software Overview
 
