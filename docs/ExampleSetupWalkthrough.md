@@ -303,7 +303,7 @@ The below diagram shows a closeup of the wiring you must implement for a pushbut
 
 The wiring of any sensor will depend on its specific requirements. The code will allow for some flexibility, e.g., in which pin(s) you use.
 
-![Wiring Diagram](/docs/media/servo_and_sensor_wiring.png)
+![Wiring Diagram](/docs/media/sensor_wiring.png)
 
 The advantage of this system is in the codebase. In [/Arduino/include/Sensors.h](/Arduino/include/Sensors.h), you will configure the sensor.
 
