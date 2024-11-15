@@ -58,19 +58,29 @@ void setup()
     Serial.setTimeout(100);
 
     // Initialize PWM servo shield
-    Serial.println("Initializing libraries...");
+    Serial.println("Initializing servo shield library...");
     pwm.begin();
     pwm.setOscillatorFrequency(27000000);
     pwm.setPWMFreq(SERVO_FREQ);
 
-    // Initialize peripherals
-    Serial.println("Initializing steppers...");
+    // Initialize steppers, servos, and sensors
+
+    Serial.print("Initializing ");
+    Serial.print(steppersCount);
+    Serial.println(" stepper(s)...");
     setupSteppers();
-    Serial.println("Initializing servos...");
+
+    Serial.print("Initializing ");
+    Serial.print(looseServosCount);
+    Serial.println(" loose servo(s)...");
     setupServos();
-    Serial.println("Initializing sensors...");
+
+    Serial.print("Initializing ");
+    Serial.print(sensorsCount);
+    Serial.println(" sensor(s)...");
     setupSensors();
     Serial.println("Ready.");
+    Serial.println("Press CTRL+C to free this serial port for other programs.");
 }
 
 void loop()

@@ -114,8 +114,10 @@ private:
 
 // Sensor array to store multiple sensors
 Sensor *sensors[] = {
-    new ButtonSensor(2),
-    // YOU: Add more sensors here
+    // YOU: Add more sensors here, in this format:
+    // new SensorType(pin1, pin2, ...),
+    // e.g.,
+    // new ButtonSensor(2),
 };
 
 // Number of sensors (0 if none)
